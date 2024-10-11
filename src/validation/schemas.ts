@@ -38,4 +38,16 @@ export const createMeetingSchema = Joi.object({
     note: Joi.string().optional()
 });
 
+//Work Schemas
+export const addWorkSchema = Joi.object({
+    title: Joi.string().required(),
+    description: Joi.string().required(),
+    hours: Joi.number().required()
+})
+
+export const updateWorkSchema = Joi.object({
+    title: Joi.string().optional(),
+    description: Joi.string().optional(),
+    hours: Joi.number().optional()
+}).min(1);
 

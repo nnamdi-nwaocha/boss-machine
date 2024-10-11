@@ -10,7 +10,8 @@ import {
     deleteAll
 } from '../controllers/crud.controller'
 import { validate } from "../middlewares/validate.middleware";
-import { createIdeaSchema, createMeetingSchema, createMinionSchema, updateIdeaSchema, updateMinionSchema } from "../validation/schemas";
+import { addWorkSchema, createIdeaSchema, createMeetingSchema, createMinionSchema, updateIdeaSchema, updateMinionSchema, updateWorkSchema } from "../validation/schemas";
+import { addWork, deleteAllWork, deleteWork, getAllWork, updateWork } from "../controllers/work.controller";
 
 const minionsRouter = express.Router();
 
@@ -19,7 +20,12 @@ minionsRouter.get('/', setEntity('Minion'), getAll);
 minionsRouter.post('/', setEntity('Minion'), validate(createMinionSchema), createEntity);
 minionsRouter.get('/:id', setEntity('Minion'), getById);
 minionsRouter.put('/:id', setEntity('Minion'), validate(updateMinionSchema), updateEntity);
-minionsRouter.delete('/:id', setEntity('Minion'), deleteEntity);
+minionsRouter.delete('/:id', setEntity('Minion'), deleteAllWork, deleteEntity);
+minionsRouter.get('/:id/work', getAllWork);
+minionsRouter.post('/:id/work', validate(addWorkSchema), addWork);
+minionsRouter.put('/:id/work/:workId', validate(updateWorkSchema), updateWork);
+minionsRouter.delete('/:id/work/:workId', deleteWork)
+
 
 const ideasRouter = express.Router();
 
