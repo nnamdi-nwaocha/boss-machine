@@ -5,11 +5,13 @@ import { Request, Response } from "express";
 import { minionsRouter, ideasRouter, meetingsRouter, } from "./routes/apiRoutes";
 import "reflect-metadata";
 import { errorHandler } from "./middlewares/error.middleware";
+import cors from 'cors';
 dotenv.config();
 
 const app = express();
 app.use(express.json());
-const { PORT = 3000 } = process.env;
+const { PORT = 4000 } = process.env;
+app.use(cors());
 app.use("/api/minions", minionsRouter);
 app.use("/api/ideas", ideasRouter);
 app.use("/api/meetings", meetingsRouter)
